@@ -1,0 +1,51 @@
+set mySucces to 0
+try
+	do shell script "mv -i ~/Downloads/*.torrent ~/.Trash"
+on error
+	set mySucces to mySucces + 1
+end try
+try
+	do shell script "mv -i ~/Downloads/*.TORRENT ~/.Trash"
+on error
+	set mySucces to mySucces + 1
+end try
+try
+	do shell script "mv -i ~/Downloads/*.Torrent ~/.Trash"
+on error
+	set mySucces to mySucces + 1
+end try
+try
+	do shell script "mv -i ~/Desktop/*.torrent ~/.Trash"
+on error
+	set mySucces to mySucces + 1
+end try
+try
+	do shell script "mv -i ~/Desktop/*.TORRENT ~/.Trash"
+on error
+	set mySucces to mySucces + 1
+end try
+try
+	do shell script "mv -i ~/Desktop/*.Torrent ~/.Trash"
+on error
+	set mySucces to mySucces + 1
+end try
+try
+	do shell script "mv -i ~/Downloads/*.download ~/.Trash"
+on error
+	set mySucces to mySucces + 1
+end try
+try
+	do shell script "mv -i ~/Desktop/*.part ~/.Trash"
+on error
+	set mySucces to mySucces + 1
+end try
+-- Proposer de vider la corbeille
+if mySucces < 8 then
+	set theButton to button returned of (display dialog "Voulez-vous vraiment effacer définitivement les éléments de la corbeille ?" with icon caution buttons {"Vider la corbeille", "Annuler"} default button "Vider la corbeille" giving up after 5)
+	
+	if theButton is "Vider la corbeille" then
+		tell application "Finder"
+			empty trash
+		end tell
+	end if
+end if
