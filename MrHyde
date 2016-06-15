@@ -1,0 +1,23 @@
+try
+	set appName to "Safari"
+	set appNames to {}
+	tell application "System Events"
+		set appNames to the name of every process whose background only is false and visible is true
+	end tell
+	set frontapp to appNames's item 1
+	if frontapp = appName then
+		set frontapp to appNames's item 2
+	end if
+	tell application "System Events"
+		if visible of process appName is true then
+			tell application frontapp
+				activate
+			end tell
+			delay 0.02
+			set visible of process appName to false
+		else
+			set visible of process appName to true
+			set frontmost of process appName to true
+		end if
+	end tell
+end try
