@@ -1,0 +1,3 @@
+try
+	mount volume "smb://User:Password@IpAdress/MountDir/"
+end try
