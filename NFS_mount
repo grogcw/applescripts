@@ -1,0 +1,13 @@
+try
+	set thePing to do shell script "/sbin/ping -o -c 2 <host>"
+	try
+		mount volume "nfs://<host>:/path/to/mountpoint"
+	end try
+on error
+	-- say "1 is down."
+	activate me
+	set theButton to button returned of (display dialog "<Host> is down" with icon stop buttons {"Cancel", "OK"} default button "OK" giving up after 2)
+	if theButton is "Cancel" then
+		do shell script "killall NFS_mount"
+	end if
+end try
